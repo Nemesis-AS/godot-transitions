@@ -1,0 +1,38 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OldScene" type="ViewportContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport1" type="Viewport" parent="OldScene"]
+size = Vector2( 1024, 600 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="NewScene" type="ViewportContainer" parent="."]
+margin_left = 1024.0
+margin_right = 2048.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport2" type="Viewport" parent="NewScene"]
+size = Vector2( 1024, 600 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="Tween" type="Tween" parent="."]
