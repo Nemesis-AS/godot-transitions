@@ -3,8 +3,6 @@
 [ext_resource path="res://demo/Demo1.gd" type="Script" id=2]
 [ext_resource path="res://demo/Assets/Kenney Blocks.tres" type="DynamicFont" id=3]
 
-
-
 [node name="Demo1" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -30,18 +28,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonHolder" type="Control" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="ButtonHolder" type="GridContainer" parent="CanvasLayer"]
+margin_left = 192.0
+margin_top = 256.0
+margin_right = 460.0
+margin_bottom = 368.0
+custom_constants/vseparation = 64
+custom_constants/hseparation = 128
+columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Fade OutIn" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_left = 128.0
-margin_top = 320.0
-margin_right = 448.0
-margin_bottom = 384.0
+margin_right = 256.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
 custom_fonts/font = ExtResource( 3 )
 text = "Fade Out/In"
 __meta__ = {
@@ -49,14 +51,33 @@ __meta__ = {
 }
 
 [node name="MoveTo" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_left = 576.0
-margin_top = 320.0
-margin_right = 896.0
-margin_bottom = 384.0
+margin_left = 384.0
+margin_right = 640.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
 custom_fonts/font = ExtResource( 3 )
 text = "Move To"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Shrink" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 256, 64 )
+custom_fonts/font = ExtResource( 3 )
+text = "Shrink"
+
+[node name="SlideZag" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_left = 384.0
+margin_top = 128.0
+margin_right = 640.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 256, 64 )
+custom_fonts/font = ExtResource( 3 )
+text = "SlideZag"
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Fade OutIn" to="." method="_on_Fade_OutIn_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/MoveTo" to="." method="_on_MoveTo_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/Shrink" to="." method="_on_Shrink_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/SlideZag" to="." method="_on_SlideZag_pressed"]

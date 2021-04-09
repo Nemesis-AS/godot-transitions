@@ -2,8 +2,6 @@
 
 [ext_resource path="res://demo/Assets/Kenney Blocks.ttf" type="DynamicFontData" id=1]
 
-
-
 [resource]
-size = 32
+size = 30
 font_data = ExtResource( 1 )

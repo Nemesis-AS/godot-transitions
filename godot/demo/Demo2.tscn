@@ -3,8 +3,6 @@
 [ext_resource path="res://demo/Demo2.gd" type="Script" id=1]
 [ext_resource path="res://demo/Assets/Kenney Blocks.tres" type="DynamicFont" id=2]
 
-
-
 [node name="Demo2" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -13,8 +11,6 @@ script = ExtResource( 1 )
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1024.0
-margin_bottom = 600.0
 color = Color( 0.74902, 0.25098, 0.25098, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,20 +28,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonHolder" type="Control" parent="CanvasLayer"]
-margin_left = 24.0
-margin_top = 8.0
-margin_right = 1048.0
-margin_bottom = 608.0
+[node name="ButtonHolder" type="GridContainer" parent="CanvasLayer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 192.0
+margin_top = -44.0
+margin_right = -192.0
+margin_bottom = 88.0
+custom_constants/vseparation = 64
+custom_constants/hseparation = 128
+columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Fade OutIn" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_left = 104.0
-margin_top = 312.0
-margin_right = 424.0
-margin_bottom = 376.0
+margin_right = 256.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
 custom_fonts/font = ExtResource( 2 )
 text = "Fade Out/In"
 __meta__ = {
@@ -53,14 +54,32 @@ __meta__ = {
 }
 
 [node name="Move To" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_left = 552.0
-margin_top = 312.0
-margin_right = 872.0
-margin_bottom = 376.0
+margin_left = 384.0
+margin_right = 640.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
 custom_fonts/font = ExtResource( 2 )
 text = "Move To"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Shrink" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 256, 64 )
+custom_fonts/font = ExtResource( 2 )
+text = "Shrink"
+
+[node name="SlideZag" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_left = 384.0
+margin_top = 128.0
+margin_right = 640.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 2 )
+text = "SlideZag"
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Fade OutIn" to="." method="_on_Fade_OutIn_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Move To" to="." method="_on_Move_To_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/Shrink" to="." method="_on_Shrink_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/SlideZag" to="." method="_on_SlideZag_pressed"]
