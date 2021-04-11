@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://demo/Assets/Kenney Blocks Small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://demo/Demo1.gd" type="Script" id=2]
 [ext_resource path="res://demo/Assets/Kenney Blocks.tres" type="DynamicFont" id=3]
 
 [node name="Demo1" type="Node2D"]
 script = ExtResource( 2 )
+target = "res://demo/Demo2.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -29,55 +31,83 @@ __meta__ = {
 }
 
 [node name="ButtonHolder" type="GridContainer" parent="CanvasLayer"]
-margin_left = 192.0
-margin_top = 256.0
-margin_right = 460.0
-margin_bottom = 368.0
-custom_constants/vseparation = 64
-custom_constants/hseparation = 128
-columns = 2
+margin_left = 184.0
+margin_top = 192.0
+margin_right = 792.0
+margin_bottom = 512.0
+custom_constants/vseparation = 32
+custom_constants/hseparation = 64
+columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Fade OutIn" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_right = 256.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 256, 64 )
-custom_fonts/font = ExtResource( 3 )
+margin_right = 204.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
 text = "Fade Out/In"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MoveTo" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_left = 384.0
-margin_right = 640.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 256, 64 )
-custom_fonts/font = ExtResource( 3 )
+margin_left = 268.0
+margin_right = 406.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
 text = "Move To"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Shrink" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_top = 128.0
-margin_right = 256.0
-margin_bottom = 192.0
-rect_min_size = Vector2( 256, 64 )
-custom_fonts/font = ExtResource( 3 )
+margin_left = 470.0
+margin_right = 608.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
 text = "Shrink"
 
-[node name="SlideZag" type="Button" parent="CanvasLayer/ButtonHolder"]
-margin_left = 384.0
-margin_top = 128.0
-margin_right = 640.0
-margin_bottom = 192.0
-rect_min_size = Vector2( 256, 64 )
-custom_fonts/font = ExtResource( 3 )
-text = "SlideZag"
+[node name="SlideRect" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_top = 74.0
+margin_right = 204.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
+text = "SlideRect"
+
+[node name="HorStripes" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_left = 268.0
+margin_top = 74.0
+margin_right = 406.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
+text = "Stripes"
+
+[node name="DualCircles" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_left = 470.0
+margin_top = 74.0
+margin_right = 608.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
+text = "Circles"
+
+[node name="DonutEye" type="Button" parent="CanvasLayer/ButtonHolder"]
+margin_top = 148.0
+margin_right = 204.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 1 )
+text = "DonutEye"
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Fade OutIn" to="." method="_on_Fade_OutIn_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/MoveTo" to="." method="_on_MoveTo_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Shrink" to="." method="_on_Shrink_pressed"]
-[connection signal="pressed" from="CanvasLayer/ButtonHolder/SlideZag" to="." method="_on_SlideZag_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/SlideRect" to="." method="_on_SlideZag_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/HorStripes" to="." method="_on_HorStripes_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/DualCircles" to="." method="_on_DualCircles_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonHolder/DonutEye" to="." method="_on_DonutEye_pressed"]
