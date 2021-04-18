@@ -14,6 +14,8 @@ var SCREEN: Dictionary = {
 
 func _ready() -> void:
 	SCREEN.center = Vector2(SCREEN.width/2, SCREEN.height/2)
+	
+	print(get_tree().current_scene)
 
 func fade_out(from, to, duration: float, color: Color) -> void:
 	var rootControl = CanvasLayer.new()
@@ -40,6 +42,7 @@ func fade_out(from, to, duration: float, color: Color) -> void:
 	
 	yield(tween, "tween_all_completed")
 	
+	get_tree().set_current_scene(new_scene)
 	rootControl.queue_free()
 
 func move_to(from, to, duration: float, dir: Vector2):
@@ -74,6 +77,7 @@ func move_to(from, to, duration: float, dir: Vector2):
 	get_tree().get_root().add_child(new_scene)
 	viewportScene.queue_free()
 	new_scene.set_process(true)
+	get_tree().set_current_scene(new_scene)
 
 func shrink(from, to, duration: float):
 	# Create Nodes
@@ -115,6 +119,7 @@ func shrink(from, to, duration: float):
 	
 	yield(tween, "tween_all_completed")
 	
+	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
 
 func slide_rect(from, to, duration: float, color: Color, dir: Vector2) -> void:
@@ -143,6 +148,7 @@ func slide_rect(from, to, duration: float, color: Color, dir: Vector2) -> void:
 	
 	yield(tween, "tween_all_completed")
 	
+	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
 
 func horizontal_stripes(from, to, duration: float, color: Color, delay = 0.5):
@@ -183,6 +189,7 @@ func horizontal_stripes(from, to, duration: float, color: Color, delay = 0.5):
 	
 	yield(tween, "tween_all_completed")
 	
+	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
 
 func dual_circles(from, to, duration: float, color: Color):
@@ -229,6 +236,7 @@ func dual_circles(from, to, duration: float, color: Color):
 
 	yield(tween, "tween_all_completed")
 
+	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
 
 func donut_eye(from, to, duration: float, color: Color):
@@ -264,5 +272,6 @@ func donut_eye(from, to, duration: float, color: Color):
 	tween.start()
 
 	yield(tween, "tween_all_completed")
-
+	
+	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
