@@ -14,16 +14,16 @@ var SCREEN: Dictionary = {
 
 func _ready() -> void:
 	SCREEN.center = Vector2(SCREEN.width/2, SCREEN.height/2)
-	
-	print(get_tree().current_scene)
 
 func fade_out(from, to, duration: float, color: Color) -> void:
 	var rootControl = CanvasLayer.new()
 	var colorRect = ColorRect.new()
 	var tween = Tween.new()
+	rootControl.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	colorRect.set_frame_color(Color(0, 0, 0, 0))
 	
+	get_tree().set_pause(true)
 	get_tree().get_root().add_child(rootControl)
 	rootControl.add_child(colorRect)
 	rootControl.add_child(tween)
@@ -44,10 +44,12 @@ func fade_out(from, to, duration: float, color: Color) -> void:
 	
 	get_tree().set_current_scene(new_scene)
 	rootControl.queue_free()
+	get_tree().set_pause(false)
 
 func move_to(from, to, duration: float, dir: Vector2):
 	var viewportScene = ViewPortTemplate.instance()
 	get_tree().get_root().add_child(viewportScene)
+	viewportScene.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	var old_viewport_holder = viewportScene.get_node("OldScene")
 	var new_viewport_holder = viewportScene.get_node("NewScene")
@@ -57,6 +59,8 @@ func move_to(from, to, duration: float, dir: Vector2):
 	
 	dir.x *= SCREEN.width
 	dir.y *= SCREEN.height
+	
+	get_tree().set_pause(true)
 	
 	from.get_parent().remove_child(from)
 	old_viewport.add_child(from)
@@ -78,6 +82,7 @@ func move_to(from, to, duration: float, dir: Vector2):
 	viewportScene.queue_free()
 	new_scene.set_process(true)
 	get_tree().set_current_scene(new_scene)
+	get_tree().set_pause(false)
 
 func shrink(from, to, duration: float):
 	# Create Nodes
@@ -86,6 +91,7 @@ func shrink(from, to, duration: float):
 	var viewport = Viewport.new()
 	var colorRect = ColorRect.new()
 	var tween = Tween.new()
+	controlRoot.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	# Set Properties of the created Nodes
 	get_tree().get_root().add_child(controlRoot)
@@ -99,6 +105,7 @@ func shrink(from, to, duration: float):
 	colorRect.set_frame_color(Color(0, 0, 0, 0))
 	colorRect._set_size(Vector2(SCREEN.width, SCREEN.height))
 	controlRoot.add_child(tween)
+	get_tree().set_pause(true)
 	
 	# Tween Time!
 	tween.interpolate_property(viewport_holder, "rect_size", Vector2(SCREEN.width, SCREEN.height), Vector2.ZERO, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
@@ -121,17 +128,20 @@ func shrink(from, to, duration: float):
 	
 	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
+	get_tree().set_pause(false)
 
 func slide_rect(from, to, duration: float, color: Color, dir: Vector2) -> void:
 	var controlRoot = CanvasLayer.new()
 	var overlay = ZigZagOverlay.instance()
 	var tween = Tween.new()
+	controlRoot.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	get_tree().get_root().add_child(controlRoot)
 	controlRoot.add_child(overlay)
 	overlay.color = color
 	overlay.global_position = Vector2(0, 0)
 	controlRoot.add_child(tween)
+	get_tree().set_pause(true)
 	
 	tween.interpolate_property(overlay, "global_position", Vector2(-(dir.x * SCREEN.width), 0), Vector2(0, 0), duration/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
@@ -150,12 +160,14 @@ func slide_rect(from, to, duration: float, color: Color, dir: Vector2) -> void:
 	
 	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
+	get_tree().set_pause(false)
 
 func horizontal_stripes(from, to, duration: float, color: Color, delay = 0.5):
 	var controlRoot = CanvasLayer.new()
 	var overlay_left = StripesHorizontal.instance()
 	var overlay_right = StripesHorizontal.instance()
 	var tween = Tween.new()
+	controlRoot.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	var y_offset = 0
 	
@@ -167,6 +179,7 @@ func horizontal_stripes(from, to, duration: float, color: Color, delay = 0.5):
 	overlay_right.color = color
 	overlay_right.global_position = Vector2(SCREEN.width, y_offset)
 	controlRoot.add_child(tween)
+	get_tree().set_pause(true)
 	
 	y_offset = overlay_right.get_offset_y()
 	
@@ -180,6 +193,7 @@ func horizontal_stripes(from, to, duration: float, color: Color, delay = 0.5):
 	var new_scene = load(to).instance()
 	get_tree().get_root().add_child(new_scene)
 	from.queue_free()
+	get_tree().set_pause(true)
 	
 	yield(get_tree().create_timer(delay), "timeout")
 	
@@ -191,12 +205,14 @@ func horizontal_stripes(from, to, duration: float, color: Color, delay = 0.5):
 	
 	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
+	get_tree().set_pause(false)
 
 func dual_circles(from, to, duration: float, color: Color):
 	var controlRoot = CanvasLayer.new()
 	var overlay_top = Sector.instance()
 	var overlay_bottom = Sector.instance()
 	var tween = Tween.new()
+	controlRoot.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	get_tree().get_root().add_child(controlRoot)
 	controlRoot.add_child(overlay_top)
@@ -216,6 +232,7 @@ func dual_circles(from, to, duration: float, color: Color):
 	overlay_bottom.radius = SCREEN.center.distance_to(Vector2(SCREEN.width, 0))
 	
 	controlRoot.add_child(tween)
+	get_tree().set_pause(true)
 	
 	tween.interpolate_property(overlay_top, "angle_to", 90, -90, duration/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.interpolate_property(overlay_bottom, "angle_to", -90, -270, duration/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -238,11 +255,13 @@ func dual_circles(from, to, duration: float, color: Color):
 
 	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
+	get_tree().set_pause(false)
 
 func donut_eye(from, to, duration: float, color: Color):
 	var controlRoot = CanvasLayer.new()
 	var donut = Donut.instance()
 	var tween = Tween.new()
+	controlRoot.set_pause_mode(PAUSE_MODE_PROCESS)
 	
 	var r = SCREEN.center.distance_to(Vector2(SCREEN.width, 0)) # Screen Diagonal / 2
 	
@@ -255,6 +274,7 @@ func donut_eye(from, to, duration: float, color: Color):
 	donut.outer_radius =  r + 10
 	
 	controlRoot.add_child(tween)
+	get_tree().set_pause(true)
 	
 	tween.interpolate_property(donut, "inner_radius", r, 0, duration/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
@@ -275,3 +295,4 @@ func donut_eye(from, to, duration: float, color: Color):
 	
 	get_tree().set_current_scene(new_scene)
 	controlRoot.queue_free()
+	get_tree().set_pause(false)

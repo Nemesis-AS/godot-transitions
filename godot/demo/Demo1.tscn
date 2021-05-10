@@ -104,6 +104,7 @@ margin_bottom = 190.0
 rect_min_size = Vector2( 128, 32 )
 custom_fonts/font = ExtResource( 1 )
 text = "DonutEye"
+
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Fade OutIn" to="." method="_on_Fade_OutIn_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/MoveTo" to="." method="_on_MoveTo_pressed"]
 [connection signal="pressed" from="CanvasLayer/ButtonHolder/Shrink" to="." method="_on_Shrink_pressed"]
